@@ -111,6 +111,10 @@
 ;; Python
 (require 'virtualenvwrapper)
 (venv-initialize-interactive-shells)
+;; Lua
+(require 'lua-mode)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 ;; Projects
 (use-package projectile :ensure t
   :config
