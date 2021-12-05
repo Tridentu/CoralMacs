@@ -1,3 +1,6 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Tridentu's boilerplate Emacs distro
 ;; Basic Dependencies
 (require 'mwheel)
 (require 'dired-x)
@@ -8,8 +11,8 @@
 (mouse-wheel-mode 't)
 (electric-pair-mode 1)
 ;; Fonts
-(set-face-attribute 'default t :family "Fira Code")
-(set-frame-font "Fira Code 12" nil t)
+(set-face-attribute 'default t :family "MesloLGS NF")
+(set-frame-font "MesloLGS NF 12" nil t)
 ;; Lists
 (add-to-list 'load-path "~/.emacs.d/modules/")
 (add-to-list 'load-path "~/.emacs.d/vendor/")
@@ -48,7 +51,7 @@
 (setq package-archives '(("org"             . "http://orgmode.org/elpa/")
 			 ("gnu"             . "http://elpa.gnu.org/packages/")
 			 ("melpa"           . "https://melpa.org/packages/")
-			 ("marmalade"       . "http://marmalade-repo.org/packages/")))
+	        ))
 (setq venv-location "~/python-envs")
 ;; Packages (Core)
 (unless (package-installed-p 'use-package)
@@ -109,8 +112,67 @@
   )
   )
 ;; Python
-(require 'virtualenvwrapper)
-(venv-initialize-interactive-shells)
+(use-package elpy
+  :ensure t
+  :hook (elpy-mode . (lambda () (set (make-local-variable 'company-backends) '(elpy-company-backend :with company-yasnipet))))
+  :init
+  (elpy-enable)
+  
+  )
+;; Treemacs
+(use-package treemacs
+  :ensure t
+  :defer t
+  :init
+  )
+(use-package treemacs-projectile
+  :after (treemacs projectile)
+  :ensure t
+)
+(use-package treemacs-icons-dired
+  :hook (dired-mode . treemacs-icons-dired-enable-once)
+  :ensure t)
+;; Powerline
+(use-package powerline
+  :ensure t
+  :config
+  (powerline-default-theme)
+  )
+;; Flycheck
+(use-package flycheck
+  :ensure t
+  :config
+  (global-flycheck-mode)
+)
+;; Company
+(use-package company
+  :ensure t
+  :diminish company-mode
+  :init
+  (global-company-mode)
+  :config
+  (setq company-backends
+	'((company-files
+	   company-keywords
+	   company-capf
+	   company-abbrev
+	   company-dabbrev)))
+  )
+
+(use-package company-statistics
+  :ensure t
+  :init
+  (company-statistics-mode)
+  )
+
+(use-package company-web
+  :ensure t)
+
+(use-package company-quickhelp
+  :ensure t
+  :config
+  (company-quickhelp-mode)
+)
 ;; Lua
 (require 'lua-mode)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))

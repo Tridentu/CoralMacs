@@ -6,3 +6,5 @@ projectile-bookmarks.eld
 network-security.data
 *.old
 auto-save-list
+cache
+company-statistics-cache.el
