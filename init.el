@@ -172,7 +172,8 @@
   :ensure t
   :config
   (company-quickhelp-mode)
-)
+  )
+
 ;; Lua
 (require 'lua-mode)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
@@ -188,6 +189,25 @@
   :config
   (yas-global-mode 1)
   )
+(use-package centaur-tabs :ensure t
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward)
+   :hook
+   (dired-mode . centaur-tabs-local-mode)
+)
+(setq centaur-tabs-style "bar")
+(setq centaur-tabs-height 36)
+(setq centaur-tabs-set-icons t)
+(setq centaur-tabs-gray-out-icons 'buffer)
+(setq centaur-tabs-set-bar 'over)
+(setq centaur-tabs-close-button "X")
+(setq centaur-tabs-set-modified-marker t)
+(centaur-tabs-change-fonts "Iosevka" 140)
+(setq centaur-tabs-cycle-scope 'tabs)
 ;; Semantic Stuff
 (semantic-add-system-include "/usr/include/boost" 'c++-mode)
 ;; Hooks
