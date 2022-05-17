@@ -208,6 +208,28 @@
 (setq centaur-tabs-set-modified-marker t)
 (centaur-tabs-change-fonts "Iosevka" 140)
 (setq centaur-tabs-cycle-scope 'tabs)
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+(setq dashboard-projects-backend 'projectile)
+(setq dashboard-banner-logo-title "Welcome to CoralMacs 1.0!")
+(setq dashboard-center-content t)
+(setq dashboard-items '((recents  . 5)
+                        (bookmarks . 5)
+                        (projects . 5)
+                        (agenda . 5)
+                       ))
+(setq dashboard-item-names '(("Recent Files:" . "Recently opened files:")
+                             ("Agenda for today:" . "Today's tasks:")
+                             ("Agenda for the coming week:" . "Tasks:"))
+(setq dashboard-set-heading-icons t)
+(setq dashboard-set-file-icons t)
+(setq dashboard-set-navigator t)
+(setq dashboard-set-init-info t)
+(setq dashboard-set-footer nil)
+(setq dashboard-init-info "Dive deep into your work!")
 ;; Semantic Stuff
 (semantic-add-system-include "/usr/include/boost" 'c++-mode)
 ;; Hooks
