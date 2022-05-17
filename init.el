@@ -198,7 +198,42 @@
   ("C-<next>" . centaur-tabs-forward)
    :hook
    (dired-mode . centaur-tabs-local-mode)
-)
+   )
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+(setq dashboard-projects-backend 'projectile)
+(setq dashboard-banner-logo-title "Welcome to CoralMacs")
+(setq dashboard-center-content t)
+(setq dashboard-items '((recents  . 10)
+                        (bookmarks . 10)
+                        (projects . 5)
+                        (agenda . 5)))
+(setq dashboard-item-names '(("Recent Files:" . "Recently opened files:")
+                             ("Agenda for today:" . "Today's tasks:")
+                             ("Agenda for the coming week:" . "All Tasks:")))
+;; Format: "(icon title help action face prefix suffix)"
+(setq dashboard-navigator-buttons
+      `(;; line1
+        ((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+         "Homepage"
+         "Browse homepage"
+         (lambda (&rest _) (browse-url "homepage")))
+        ("★" "Star" "Show stars" (lambda (&rest _) (show-stars)) warning)
+        ("?" "" "?/h" #'show-help nil "<" ">")
+         ;; line 2
+        (,(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
+          "Linkedin"
+          ""
+          (lambda (&rest _) (browse-url "homepage")))
+        ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error))))
+(setq dashboard-init-info "Get ready to set sail through your fingers, cap'n!")
+(setq dashboard-set-navigator t)
+(setq dashboard-set-footer nil)
+(setq dashboard-set-init-info t)
+(setq dashboard-set-heading-icons t)
+(setq dashboard-set-file-icons t)
 (setq centaur-tabs-style "bar")
 (setq centaur-tabs-height 36)
 (setq centaur-tabs-set-icons t)
