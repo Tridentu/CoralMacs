@@ -223,7 +223,7 @@
                        ))
 (setq dashboard-item-names '(("Recent Files:" . "Recently opened files:")
                              ("Agenda for today:" . "Today's tasks:")
-                             ("Agenda for the coming week:" . "Tasks:"))
+                             ("Agenda for the coming week:" . "Tasks:")))
 (setq dashboard-set-heading-icons t)
 (setq dashboard-set-file-icons t)
 (setq dashboard-set-navigator t)
