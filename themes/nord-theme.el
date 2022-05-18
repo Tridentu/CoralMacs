@@ -6,8 +6,6 @@
 ;; Title: Nord Theme
 ;; Project: nord-emacs
 ;; Version: 0.5.0
-;; Package-Version: 20200620.1122
-;; Package-Commit: 4f5b64605709d5803285953026137e905756c35f
 ;; URL: https://github.com/arcticicestudio/nord-emacs
 ;; Author: Arctic Ice Studio <development@arcticicestudio.com>
 ;; Package-Requires: ((emacs "24"))
@@ -104,7 +102,7 @@
   (nord0 (if (nord-display-truecolor-or-graphic-p) "#2E3440" nil))
   (nord1 (if (nord-display-truecolor-or-graphic-p) "#3B4252" "black"))
   (nord2 (if (nord-display-truecolor-or-graphic-p) "#434C5E" "#434C5E"))
-  (nord3 (if (nord-display-truecolor-or-graphic-p) "#4C566A" "#111111"))
+  (nord3 (if (nord-display-truecolor-or-graphic-p) "#4C566A" "brightblack"))
   (nord4 (if (nord-display-truecolor-or-graphic-p) "#D8DEE9" "#D8DEE9"))
   (nord5 (if (nord-display-truecolor-or-graphic-p) "#E5E9F0" "white"))
   (nord6 (if (nord-display-truecolor-or-graphic-p) "#ECEFF4" "brightwhite"))
@@ -120,7 +118,7 @@
   (nord-annotation (if (nord-display-truecolor-or-graphic-p) "#D08770" "brightyellow"))
   (nord-attribute (if (nord-display-truecolor-or-graphic-p) "#8FBCBB" "cyan"))
   (nord-class (if (nord-display-truecolor-or-graphic-p) "#8FBCBB" "cyan"))
-  (nord-comment (if (nord-display-truecolor-or-graphic-p) (nord-theme--brightened-comment-color nord-comment-brightness) "cyan"))
+  (nord-comment (if (nord-display-truecolor-or-graphic-p) (nord-theme--brightened-comment-color nord-comment-brightness) "brightblack"))
   (nord-escape (if (nord-display-truecolor-or-graphic-p) "#D08770" "brightyellow"))
   (nord-method (if (nord-display-truecolor-or-graphic-p) "#88C0D0" "brightcyan"))
   (nord-keyword (if (nord-display-truecolor-or-graphic-p) "#81A1C1" "blue"))
@@ -707,13 +705,7 @@
     `(ivy-minibuffer-match-face-2 ((,class (:background ,nord7 :foreground ,nord0))))
     `(ivy-minibuffer-match-face-3 ((,class (:background ,nord8 :foreground ,nord0))))
     `(ivy-minibuffer-match-face-4 ((,class (:background ,nord9 :foreground ,nord0))))
-    `(ivy-remote ((,class (:foreground ,nord14))))
-    `(ivy-posframe ((,class (:background ,nord1))))
-    `(ivy-posframe-border ((,class (:background ,nord1))))
-    `(ivy-remote ((,class (:foreground ,nord14))))
-
-    ;; > perspective
-    `(persp-selected-face ((,class (:foreground ,nord8 :weight bold))))))
+    `(ivy-remote ((,class (:foreground ,nord14))))))
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)

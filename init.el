@@ -59,8 +59,8 @@
   (package-install 'use-package)
 )
 (require 'use-package)
-;; Nord
-(load-theme 'nord t)
+;; Afternoon
+(load-theme 'afternoon t)
 ;; General
 (use-package general :ensure t
   :config
@@ -138,6 +138,31 @@
   :config
   (powerline-default-theme)
   )
+;; Origami
+(use-package origami :ensure t)
+(global-origami-mode +1)
+;; Helpful
+(use-package helpful :ensure t)
+(global-set-key (kbd "C-h f") #'helpful-callable)
+(global-set-key (kbd "C-h v") #'helpful-variable)
+(global-set-key (kbd "C-h k") #'helpful-key)
+;; Lookup the current symbol at point. C-c C-d is a common keybinding
+;; for this in lisp modes.
+(global-set-key (kbd "C-c C-d") #'helpful-at-point)
+
+;; Look up *F*unctions (excludes macros).
+;;
+;; By default, C-h F is bound to `Info-goto-emacs-command-node'. Helpful
+;; already links to the manual, if a function is referenced there.
+(global-set-key (kbd "C-h F") #'helpful-function)
+
+;; Look up *C*ommands.
+;;
+;; By default, C-h C is bound to describe `describe-coding-system'. I
+;; don't find this very useful, but it's frequently useful to only
+;; look at interactive functions.
+(global-set-key (kbd "C-h C") #'helpful-command)
+
 ;; Flycheck
 (use-package flycheck
   :ensure t
@@ -173,6 +198,10 @@
   :config
   (company-quickhelp-mode)
   )
+(setq company-quickhelp-color-background "#1c1c1c")
+(setq company-quickhelp-color-foreground "#eaeaea")
+ '(frame-background-mode 'nil)
+ ;; '(hl-sexp-background-color "#1c1f26")
 
 ;; Lua
 (require 'lua-mode)
@@ -189,6 +218,10 @@
   :config
   (yas-global-mode 1)
   )
+(use-package apheleia
+  :ensure t)
+(apheleia-global-mode +1)
+
 (use-package centaur-tabs :ensure t
   :demand
   :config
@@ -196,7 +229,7 @@
   :bind
   ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward)
-   :hook
+    :hook
    (dired-mode . centaur-tabs-local-mode)
 )
 (setq centaur-tabs-style "bar")
@@ -208,6 +241,7 @@
 (setq centaur-tabs-set-modified-marker t)
 (centaur-tabs-change-fonts "Iosevka" 140)
 (setq centaur-tabs-cycle-scope 'tabs)
+;; Dashboard
 (use-package dashboard
   :ensure t
   :config
@@ -216,24 +250,33 @@
 (setq dashboard-projects-backend 'projectile)
 (setq dashboard-banner-logo-title "Welcome to CoralMacs 1.0!")
 (setq dashboard-center-content t)
-(setq dashboard-items '((recents  . 5)
-                        (bookmarks . 5)
-                        (projects . 5)
-                        (agenda . 5)
-                       ))
-(setq dashboard-item-names '(("Recent Files:" . "Recently opened files:")
-                             ("Agenda for today:" . "Today's tasks:")
-                             ("Agenda for the coming week:" . "Tasks:")))
+
 (setq dashboard-set-heading-icons t)
 (setq dashboard-set-file-icons t)
 (setq dashboard-set-navigator t)
 (setq dashboard-set-init-info t)
 (setq dashboard-set-footer nil)
 (setq dashboard-init-info "Dive deep into your work!")
+(use-package dashboard-ls
+  :ensure t)
+(setq dashboard-items '((recents  . 10)
+                        (bookmarks . 5)
+                        (projects . 5)
+                        (agenda . 10)
+			(ls-directories . 5)
+			(ls-files . 10)
+                       ))
+(setq dashboard-item-names '(("Recent Files:" . "Recently opened files:")
+                             ("Agenda for today:" . "Today's tasks:")
+                             ("Agenda for the coming week:" . "Tasks:")))
 ;; Semantic Stuff
 (semantic-add-system-include "/usr/include/boost" 'c++-mode)
 ;; Hooks
 (add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'emacs-lisp-mode-hook
+            (lambda ()
+              (push '(">=" . ?≥) prettify-symbols-alist)))
+
 ;; Extra Dependencies
 (require 'personaloader)
 (coralmacs-load-persona)
